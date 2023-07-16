@@ -1,4 +1,4 @@
-# Booboil - Study伙伴匹配组队系统
+# Booboil心动伙伴-Study匹配组队系统
 
 项目线上访问地址：http://175.178.172.77/
 

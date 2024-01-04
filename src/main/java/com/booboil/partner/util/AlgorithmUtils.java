@@ -6,8 +6,7 @@ import java.util.Objects;
 /**
  * 算法工具类
  *
- * @author niumazlb
- * @create 2022-09-24 14:39
+ * @author booboil
  */
 public class AlgorithmUtils {
 

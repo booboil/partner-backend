@@ -10,4 +10,4 @@ COPY settings.xml /usr/share/maven/conf/settings.xml
 RUN mvn package -DskipTests
 
 # Run the web service on container startup.
-CMD ["java","-jar","/app/target/langbei-0.0.1-SNAPSHOT.jar","--spring.profiles.active=prod"]
+CMD ["java","-jar","/app/target/partner-0.0.1-SNAPSHOT.jar","--spring.profiles.active=prod"]

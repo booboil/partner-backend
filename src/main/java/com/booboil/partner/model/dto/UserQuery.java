@@ -6,8 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author niuma
- * @create 2023-02-10 22:22
+ * @author booboil
  */
 @Data
 public class UserQuery extends PageRequest {

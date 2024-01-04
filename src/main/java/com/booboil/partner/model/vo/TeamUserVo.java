@@ -8,8 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author niumazlb
- * @create 2022-08-29 20:23
+ * @author booboil
  */
 @Data
 public class TeamUserVo implements Serializable {

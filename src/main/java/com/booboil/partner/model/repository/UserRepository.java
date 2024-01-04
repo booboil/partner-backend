@@ -10,8 +10,7 @@
 //
 ///**
 // *
-// * @author niuma
-// * @create 2023-02-21 21:07
+// * @author booboil
 // */
 //@Repository
 //public interface UserRepository extends ElasticsearchRepository<UserVo,Long> {

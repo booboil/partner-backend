@@ -5,9 +5,8 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author niumazlb
- * @create 2022-08-31 10:23
- */
+ * @author booboil
+ * */
 @Data
 public class TeamJoinRequest implements Serializable {
 

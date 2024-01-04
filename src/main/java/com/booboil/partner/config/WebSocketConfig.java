@@ -11,7 +11,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 /**
- * @author niumazlb
+ * @author booboil
  */
 @Configuration
 @EnableWebSocket

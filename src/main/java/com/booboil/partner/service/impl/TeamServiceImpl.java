@@ -36,9 +36,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
- * @author niumazlb
+ * @author booboil
  * @description 针对表【team(队伍)】的数据库操作Service实现
- * @createDate 2022-08-22 10:32:26
  */
 @Service
 public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team>
@@ -298,7 +297,7 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team>
         }
         //查询当前用户加入队伍总数,最多创建/加入5个队伍
         long userId = loginUser.getId();
-        RLock lock = redissonClient.getLock("langbei:join_team");
+        RLock lock = redissonClient.getLock("partner:join_team");
         try {
             while (true) {
                 if (lock.tryLock(0, -1, TimeUnit.MILLISECONDS)) {

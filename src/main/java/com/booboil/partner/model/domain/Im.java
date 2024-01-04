@@ -10,7 +10,7 @@ import lombok.Data;
 
 /**
  *
- * @author niumazlb
+ * @author booboil
  * @TableName im
  */
 @TableName(value ="im")

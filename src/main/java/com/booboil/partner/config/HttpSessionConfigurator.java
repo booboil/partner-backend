@@ -9,7 +9,7 @@ import javax.websocket.server.HandshakeRequest;
 import javax.websocket.server.ServerEndpointConfig;
 
 /**
- * @author niumazlb
+ * @author booboil
  */
 
 public class HttpSessionConfigurator extends ServerEndpointConfig.Configurator {

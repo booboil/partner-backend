@@ -17,8 +17,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
- * @author niumazlb
- * @create 2022-12-09 16:49
+ * @author booboil
  */
 @Component
 public class UpdateTeamJob {
@@ -35,7 +34,7 @@ public class UpdateTeamJob {
 
     @Scheduled(cron = "0 */10 * * * ?")
     public void doUpdateTeam() {
-        RLock lock = redissonClient.getLock("langbei:preUpdateTeamJob:doUpdate:lock");
+        RLock lock = redissonClient.getLock("partner:preUpdateTeamJob:doUpdate:lock");
         try {
             if (lock.tryLock(0, -1, TimeUnit.MILLISECONDS)) {
                 QueryWrapper<Team> queryWrapper = new QueryWrapper<>();

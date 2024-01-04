@@ -3,8 +3,7 @@ package com.booboil.partner.common;
 /**
  * 错误码
  *
- * @author niumazlb
- * @create 2022-04-05 21:49
+ * @author booboil
  */
 
 public enum ErrorCode {

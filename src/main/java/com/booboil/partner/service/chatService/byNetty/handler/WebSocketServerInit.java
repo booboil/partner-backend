@@ -11,8 +11,7 @@ import io.netty.handler.stream.ChunkedWriteHandler;
 import org.springframework.stereotype.Component;
 
 /**
- * @author niuma
- * @create 2023-02-09 23:15
+ * @author booboil
  */
 @Component
 public class WebSocketServerInit extends ChannelInitializer<SocketChannel> {

@@ -10,8 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author niumazlb
- * @create 2022-08-18 21:18
+ * @author booboil
  */
 @Component
 public class PreCacheJob {
@@ -29,13 +28,13 @@ public class PreCacheJob {
 
 //    @Scheduled(cron = "0 00 22 * * *")
 //    public void doCacheRecommendUser() {
-//        RLock lock = redissonClient.getLock("langbei:preCacheJob:doCache:lock");
+//        RLock lock = redissonClient.getLock("partner:preCacheJob:doCache:lock");
 //        try {
 //            if (lock.tryLock(0, -1, TimeUnit.MILLISECONDS)) {
 //                for (Long id : mainUserList) {
 //                    QueryWrapper<User> queryWrapper = new QueryWrapper<>();
 //                    Page<User> userPage = userService.page(new Page<>(1, 20), queryWrapper);
-//                    String redisKey = String.format("langbei:user:recommend:%s", id);
+//                    String redisKey = String.format("partner:user:recommend:%s", id);
 //                    redisTemplate.opsForValue().set(redisKey, userPage, 30000, TimeUnit.MILLISECONDS);
 //                }
 //            }

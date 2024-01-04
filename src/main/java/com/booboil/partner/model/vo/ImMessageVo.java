@@ -4,8 +4,7 @@ import com.booboil.partner.model.domain.Im;
 import lombok.Data;
 
 /**
- * @author niuma
- * @create 2023-02-10 17:21
+ * @author booboil
  */
 @Data
 public class ImMessageVo {

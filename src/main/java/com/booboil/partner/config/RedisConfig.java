@@ -13,8 +13,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Component;
 
 /**
- * @author niumazlb
- * @create 2022-08-08 22:19
+ * @author booboil
  */
 @Component
 @ConfigurationProperties(prefix = "spring.redis")

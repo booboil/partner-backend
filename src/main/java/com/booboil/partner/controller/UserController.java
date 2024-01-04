@@ -31,12 +31,12 @@ import java.util.stream.Collectors;
 import static com.booboil.partner.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
- * @author niumazlb
- * @create 2022-03-19 16:59
+ * @author booboil
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = {"http://175.178.172.77/"}, allowCredentials = "true")
+//跨域
+//@CrossOrigin(origins = {"http://175.178.172.77/"}, allowCredentials = "true")
 public class UserController {
     @Resource
     private UserService userService;
@@ -160,7 +160,7 @@ public class UserController {
     public BaseResponse<Page<User>> recommendUsers(long pageSize, long pageNum, HttpServletRequest request) {
         User loginUser = userService.getLoginUser(request);
         Page<User> userPage ;
-//        String redisKey = String.format("langbei:user:recommend:%s", loginUser.getId());
+//        String redisKey = String.format("partner:user:recommend:%s", loginUser.getId());
 //        Page<User> userPage = (Page<User>) redisTemplate.opsForValue().get(redisKey);
 //        if (userPage != null) {
 //            return ResultUtils.success(userPage);

@@ -24,7 +24,7 @@
 //
 ///**
 // * 用户搜索服务
-// * @author niumazlb
+// * @author booboil
 // */
 //@Service
 //public class UserSearchServiceImpl implements UserSearchService {

@@ -1,8 +1,7 @@
 package com.booboil.partner.constant;
 
 /**
- * @author niuma
- * @create 2023-02-13 22:09
+ * @author booboil
  */
 public interface ChatConstant {
     /**

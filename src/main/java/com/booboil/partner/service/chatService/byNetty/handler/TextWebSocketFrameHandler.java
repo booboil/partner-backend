@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  * 用来解析websocket连接时的url参数
  * 参考：https://blog.csdn.net/mfkarj/article/details/103279559
- * @author niumazlb
+ * @author booboil
  */
 @ChannelHandler.Sharable
 @Slf4j

@@ -5,8 +5,7 @@ import lombok.Data;
 /**
  * 通用的删除请求
  *
- * @author niumazlb
- * @create 2022-09-20 20:49
+ * @author booboil
  */
 @Data
 public class DeleteRequest {

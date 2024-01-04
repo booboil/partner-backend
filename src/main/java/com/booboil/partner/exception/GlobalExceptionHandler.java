@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * 全局异常处理器，利用SpringBoot的AOP
  *
- * @author niumazlb
- * @create 2022-04-06 11:07
+ * @author booboil
  */
 @RestControllerAdvice
 @Slf4j

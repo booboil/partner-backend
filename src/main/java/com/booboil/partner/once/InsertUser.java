@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * @author niumazlb
- * @create 2022-07-22 11:36
+ * @author booboil
  */
 @Component
 public class InsertUser {

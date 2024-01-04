@@ -7,8 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author niumazlb
- * @create 2022-08-30 21:24
+ * @author booboil
  */
 @Data
 public class TeamUpdateRequest implements Serializable {

@@ -28,8 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * websocket服务
  *
- * @author niuma
- * @create 2023-02-13 21:42
+ * @author booboil
  */
 @ServerEndpoint(value = "/im", configurator = HttpSessionConfigurator.class)
 @Component

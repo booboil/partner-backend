@@ -17,7 +17,7 @@ public class Knife4jConfiguration {
     public Docket defaultApi2() {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
-                        .title("langbei-backend")
+                        .title("partner-backend")
                         .description("找伙伴后端")
                         .termsOfServiceUrl("http://www.xx.com/")
                         .contact("1394293788@qq.com")

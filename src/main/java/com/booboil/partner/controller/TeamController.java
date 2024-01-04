@@ -32,12 +32,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @author niumazlb
- * @create 2022-08-22 10:39
+ * @author booboil
  */
 @RestController
 @RequestMapping("/team")
-@CrossOrigin(origins = {"http://175.178.172.77/"}, allowCredentials = "true")
+//跨域
+//@CrossOrigin(origins = {"http://175.178.172.77/"}, allowCredentials = "true")
 public class TeamController {
 
     @Resource

@@ -5,8 +5,7 @@ import com.booboil.partner.common.ErrorCode;
 /**
  * 自定义异常类
  *
- * @author niumazlb
- * @create 2022-04-06 10:47
+ * @author booboil
  */
 public class BusinessException extends RuntimeException {
 

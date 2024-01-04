@@ -7,9 +7,8 @@ import com.booboil.partner.service.UserTeamService;
 import org.springframework.stereotype.Service;
 
 /**
- * @author niumazlb
+ * @author booboil
  * @description 针对表【user_team(用户队伍关系)】的数据库操作Service实现
- * @createDate 2022-08-22 10:32:15
  */
 @Service
 public class UserTeamServiceImpl extends ServiceImpl<UserTeamMapper, UserTeam>

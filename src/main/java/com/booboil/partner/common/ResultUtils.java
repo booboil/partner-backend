@@ -3,8 +3,7 @@ package com.booboil.partner.common;
 /**
  * 通用返回类
  *
- * @author niumazlb
- * @create 2022-04-05 21:38
+ * @author booboil
  */
 public class ResultUtils {
     /**

@@ -19,8 +19,7 @@
 //import java.util.stream.Collectors;
 //
 ///**
-// * @author niuma
-// * @create 2023-02-21 21:11
+// * @author booboil
 // */
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 //class UserSearchServiceTest {
@@ -69,7 +68,7 @@
 //    void testElasticsearchRestTemplate(){
 ////        //创建索引库
 ////        template.indexOps(UserVo.class).create();//从对象中创建
-////        template.indexOps(IndexCoordinates.of("langbei")).create();//指定名称创建
+////        template.indexOps(IndexCoordinates.of("partner")).create();//指定名称创建
 ////        //创建mapping
 ////        Document mapping = template.indexOps(UserVo.class).createMapping();
 ////        template.indexOps(UserVo.class).putMapping(mapping);

@@ -8,8 +8,7 @@
 //import java.util.List;
 //
 ///**
-// * @author niumazlb
-// * @create 2022-03-12 21:23
+// * @author booboil
 // */
 //@SpringBootTest
 //class UserServiceTest {
@@ -18,7 +17,7 @@
 //  @Test
 //  public void testAddUser() {
 //    User user = new User();
-//    user.setUsername("niuma");
+//    user.setUsername("booboil");
 //    user.setUserAccount("123");
 //    user.setAvatarUrl("https://mvnrepository.com/img/73fb51f61e7d12b766d8dfaf3bf16b90");
 //    user.setGender(0);
@@ -33,7 +32,7 @@
 //
 ////  @Test
 ////  void userRegister() {
-////    String userAccount = "niuma";
+////    String userAccount = "booboil";
 ////    String userPassword = "";
 ////    String checkPassword = "123456";
 ////    String planetCode = "520";
@@ -42,7 +41,7 @@
 ////    userAccount = "niu";
 ////    result = userService.userRegister(userAccount, userPassword, checkPassword,planetCode);
 ////    Assertions.assertEquals(-1,result);
-////    userAccount = "niuma";
+////    userAccount = "booboil";
 ////    userPassword= "123456";
 ////    result = userService.userRegister(userAccount, userPassword, checkPassword,planetCode);
 ////    Assertions.assertEquals(-1,result);
@@ -57,7 +56,7 @@
 ////    checkPassword="12345678";
 ////    result = userService.userRegister(userAccount, userPassword, checkPassword,planetCode);
 ////    Assertions.assertEquals(-1,result);
-////    userAccount = "niuma";
+////    userAccount = "booboil";
 ////    result = userService.userRegister(userAccount, userPassword, checkPassword,planetCode);
 ////    Assertions.assertTrue(result>0);
 ////

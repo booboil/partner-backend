@@ -5,8 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author niumazlb
- * @create 2022-09-10 15:55
+ * @author booboil
  */
 @Data
 public class TeamQuitRequest implements Serializable {

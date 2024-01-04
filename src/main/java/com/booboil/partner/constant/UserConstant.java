@@ -3,8 +3,7 @@ package com.booboil.partner.constant;
 /**
  * 用户常量
  *
- * @author niumazlb
- * @create 2022-03-19 21:34
+ * @author booboil
  */
 public interface UserConstant {
 

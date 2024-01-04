@@ -9,11 +9,11 @@
         <relativePath/>
         <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.niuma</groupId>
-    <artifactId>langbei</artifactId>
+    <groupId>com.booboil</groupId>
+    <artifactId>partner</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>langbei</name>
-    <description>langbei-plus</description>
+    <name>partner</name>
+    <description>partner-plus</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

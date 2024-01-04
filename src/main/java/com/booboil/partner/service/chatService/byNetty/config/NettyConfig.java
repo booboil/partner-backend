@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 存储每个连接
- * @author niumazlb
+ * @author booboil
  */
 @Resource
 public class NettyConfig {

@@ -29,9 +29,8 @@ import static com.booboil.partner.constant.UserConstant.ADMIN_ROLE;
 import static com.booboil.partner.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
- * @author niumazlb
+ * @author booboil
  * @description 针对表【user(用户)】的数据库操作Service实现
- * @createDate 2022-03-12 21:21:05
  */
 @Service
 @Slf4j
@@ -40,7 +39,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     /**
      * 盐值，混淆密码
      */
-    private static final String SALT = "niuma";
+    private static final String SALT = "booboil";
     @Resource
     private UserMapper userMapper;
 //    @Resource

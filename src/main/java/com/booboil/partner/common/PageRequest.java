@@ -7,8 +7,7 @@ import java.io.Serializable;
 /**
  * 通用分页参数
  *
- * @author niumazlb
- * @create 2022-08-22 11:04
+ * @author booboil
  */
 @Data
 public class PageRequest implements Serializable {

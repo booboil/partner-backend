@@ -9,8 +9,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.springframework.stereotype.Component;
 
 /**
- * @author niuma
- * @create 2023-02-09 23:10
+ * @author booboil
  */
 @Component
 public class ChatNettyWebSocketServer {

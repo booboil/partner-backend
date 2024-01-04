@@ -2,7 +2,7 @@ package com.booboil.partner.constant;
 
 /**
  * rabbitMq常量
- * @author niumazlb
+ * @author booboil
  */
 public class MqConstants {
     /**

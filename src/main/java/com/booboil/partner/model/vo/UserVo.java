@@ -13,11 +13,10 @@ import org.springframework.data.annotation.Id;
 import java.util.Date;
 
 /**
- * @author niumazlb
- * @create 2022-08-30 19:41
+ * @author booboil
  */
 @Data
-//@Document(indexName = "langbei")
+//@Document(indexName = "partner")
 //@Setting(shards = 1,replicas = 1)
 @NoArgsConstructor
 @AllArgsConstructor

@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @author niumazlb
+ * @author booboil
  * @description 针对表【user(用户)】的数据库操作Service
- * @createDate 2022-03-12 21:21:05
  */
 public interface UserService extends IService<User> {
 

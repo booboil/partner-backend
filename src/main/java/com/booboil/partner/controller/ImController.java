@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
 */
 @RestController
 @RequestMapping("/im")
-@CrossOrigin(origins = {"http://175.178.172.77/"}, allowCredentials = "true")
+//跨域
+//@CrossOrigin(origins = {"http://175.178.172.77/"}, allowCredentials = "true")
 public class ImController {
 
     @Resource

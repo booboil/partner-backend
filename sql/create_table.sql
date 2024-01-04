@@ -1,3 +1,12 @@
+# 数据库初始化
+# @author <a href="https://github.com/booboil">程序员booboil</a>
+#
+
+-- 创建库
+create database if not exists booboil_partner;
+
+-- 切换库
+use booboil_partner;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;

@@ -15,10 +15,12 @@ import com.booboil.partner.model.dto.request.UserRegisterRequest;
 import com.booboil.partner.model.vo.UserVo;
 import com.booboil.partner.service.UserService;
 import com.booboil.partner.service.UserTeamService;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-//import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static com.booboil.partner.constant.UserConstant.USER_LOGIN_STATE;
@@ -35,7 +38,8 @@ import static com.booboil.partner.constant.UserConstant.USER_LOGIN_STATE;
  */
 @RestController
 @RequestMapping("/user")
-//跨域
+@Slf4j
+// 跨域
 //@CrossOrigin(origins = {"http://175.178.172.77/"}, allowCredentials = "true")
 public class UserController {
     @Resource
@@ -46,13 +50,14 @@ public class UserController {
 
 //    @Resource
 //    private RabbitTemplate rabbitTemplate;
+
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
     @PostMapping("/register")
+    @ApiOperation("用户注册")
     public BaseResponse<Long> userRegister(@RequestBody UserRegisterRequest userRegisterRequest) {
         if (userRegisterRequest == null) {
-//      return ResultUtils.error(ErrorCode.PARAMS_ERROR);
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         String userAccount = userRegisterRequest.getUserAccount();
@@ -72,6 +77,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
+    @ApiOperation("用户登录")
     public BaseResponse<User> userLogin(
             @RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
         if (userLoginRequest == null) {
@@ -90,6 +96,7 @@ public class UserController {
     }
 
     @PostMapping("/logout")
+    @ApiOperation("用户登出")
     public BaseResponse<Integer> userLogout(HttpServletRequest request) {
         if (request == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -99,6 +106,7 @@ public class UserController {
     }
 
     @GetMapping("/current")
+    @ApiOperation("当前用户校验-脱敏")
     public BaseResponse<User> getCurrentUser(HttpServletRequest request) {
         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
         User userCurrent = (User) userObj;
@@ -112,6 +120,7 @@ public class UserController {
     }
 
     @GetMapping("/search")
+    @ApiOperation("根据用户名搜索")
     public BaseResponse<List<User>> searchUsers(String username, HttpServletRequest request) {
         if (!userService.isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH);
@@ -128,6 +137,7 @@ public class UserController {
     }
 
     @PostMapping("/searchPage")
+    @ApiOperation("搜索页面-分页")
     public BaseResponse<Page<User>> searchUsersPage(@RequestBody UserQuery userQuery) {
         String searchText = userQuery.getSearchText();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -147,6 +157,7 @@ public class UserController {
     }
 
     @GetMapping("/search/tags")
+    @ApiOperation("根据标签搜索用户")
     public BaseResponse<List<User>> searchUserByTags(@RequestParam(required = false) List<String> tagList, HttpServletRequest request) {
         if (CollectionUtils.isEmpty(tagList)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -157,22 +168,37 @@ public class UserController {
     }
 
     @GetMapping("/recommend")
+    @ApiOperation("推荐用户")
     public BaseResponse<Page<User>> recommendUsers(long pageSize, long pageNum, HttpServletRequest request) {
-        User loginUser = userService.getLoginUser(request);
-        Page<User> userPage ;
-//        String redisKey = String.format("partner:user:recommend:%s", loginUser.getId());
-//        Page<User> userPage = (Page<User>) redisTemplate.opsForValue().get(redisKey);
-//        if (userPage != null) {
-//            return ResultUtils.success(userPage);
-//        }
+//        User loginUser = userService.getLoginUser(request);
+//        Page<User> userPage ;
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        userPage = userService.page(new Page<>(pageNum, pageSize), queryWrapper);
+//        return ResultUtils.success(userPage);
 
+        User loginUser = userService.getLoginUser(request);
+        // 将用户信息和固定格式的字符串拼接成一个redisKey
+        String redisKey = String.format("partner:user:recommend:%s", loginUser.getId());
+        ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
+        // 如果有缓存，直接读缓存
+        Page<User> userPage = (Page<User>) valueOperations.get(redisKey);
+        if (userPage != null) {
+            return ResultUtils.success(userPage);
+        }
+        // 若无缓存，查询数据库
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         userPage = userService.page(new Page<>(pageNum, pageSize), queryWrapper);
-//        redisTemplate.opsForValue().set(redisKey, userPage, 30, TimeUnit.MINUTES);
+        // 写缓存
+        try {
+            valueOperations.set(redisKey, userPage, 30, TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            log.error("redis set key error", e);
+        }
         return ResultUtils.success(userPage);
     }
 
     @PostMapping("/update")
+    @ApiOperation("更新用户信息")
     public BaseResponse<Integer> updateUser(@RequestBody User user, HttpServletRequest request) {
         if (user == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);

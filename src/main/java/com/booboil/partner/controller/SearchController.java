@@ -15,8 +15,7 @@
 // */
 //@RestController
 //@RequestMapping("/search")
-//@CrossOrigin(origins = {"http://175.178.172.77/","https://pc.hb.dogbin.vip/"}, allowCredentials = "true")
-//public class SearchController {
+// public class SearchController {
 //    @Resource
 //    UserSearchService userSearchService;
 //

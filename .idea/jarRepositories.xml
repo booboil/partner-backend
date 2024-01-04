@@ -2,6 +2,16 @@
 <project version="4">
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
+      <option name="id" value="devops_snapshot_maven_maven" />
+      <option name="name" value="devops_snapshot_maven_maven" />
+      <option name="url" value="https://tone.tcl.com/pkg/devops/maven/maven/snapshot/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />
@@ -15,6 +25,11 @@
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="devops_release_maven_maven" />
+      <option name="name" value="devops_release_maven_maven" />
+      <option name="url" value="https://tone.tcl.com/pkg/devops/maven/maven/release/" />
     </remote-repository>
   </component>
 </project>

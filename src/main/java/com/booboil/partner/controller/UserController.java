@@ -210,6 +210,7 @@ public class UserController {
     }
 
     @PostMapping("/delete")
+    @ApiOperation("删除用户信息")
     @Transactional
     public BaseResponse<Boolean> deleteUsers(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
         if (!userService.isAdmin(request)) {
@@ -230,6 +231,7 @@ public class UserController {
     }
 
     @GetMapping("/match")
+    @ApiOperation("获取最匹配的用户")
     public BaseResponse<List<User>> matchUsers(long num, HttpServletRequest request) {
         User loginUser = userService.getLoginUser(request);
         List<User> matchUsers = userService.matchUsers(num, loginUser);
@@ -237,6 +239,7 @@ public class UserController {
     }
 
     @PostMapping("/getUserListByIds")
+    @ApiOperation("获取用户列表")
     public BaseResponse<List<UserVo>> getUserListByIds(@RequestBody UserQuery userQuery){
         List<User> userList = userService.listByIds(userQuery.getIds());
         List<UserVo> userVoList = userList.stream().map(user -> {

@@ -211,7 +211,6 @@ public class UserController {
 
     @PostMapping("/delete")
     @ApiOperation("删除用户信息")
-    @Transactional
     public BaseResponse<Boolean> deleteUsers(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
         if (!userService.isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH);

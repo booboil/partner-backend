@@ -13,11 +13,9 @@ import com.booboil.partner.util.AlgorithmUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.util.Pair;
-//import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -296,16 +294,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("id", "tags");
         queryWrapper.isNotNull("tags");
-        queryWrapper.ne("tags", "[]");
+        queryWrapper.ne("tags", "[]"); // ne不等于
         List<User> userList = this.list(queryWrapper);
         String tags = loginUser.getTags();
         Gson gson = new Gson();
+        // Gson库根据TypeToken类型和传入的JSON字符串进行解析
+        // 将其中的标签数据解析为List<String>类型的对象tagList
         List<String> tagList = gson.fromJson(tags, new TypeToken<List<String>>() {
         }.getType());
         if(CollectionUtils.isEmpty(tagList)){
             return new ArrayList<>();
         }
-        // 用户列表的下标 => 相似度
+
+        // 用户列表的下标 => 相似度 (Pair是一个JavaFX中的类，其中存放了两个元素，可以理解为一种简单的键值对)
         List<Pair<User, Long>> list = new ArrayList<>();
         // 依次计算所有用户和当前用户的相似度
         for (int i = 0; i < userList.size(); i++) {
@@ -317,17 +318,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             }
             List<String> userTagList = gson.fromJson(userTags, new TypeToken<List<String>>() {
             }.getType());
-            // 计算分数
+            // 计算分数 (编辑距离算法)
             long distance = AlgorithmUtils.minDistance(tagList, userTagList);
             list.add(new Pair<>(user, distance));
         }
+
         // 按编辑距离由小到大排序
         List<Pair<User, Long>> topUserPairList = list.stream()
                 .sorted((a, b) -> (int) (a.getValue() - b.getValue()))
                 .limit(num)
                 .collect(Collectors.toList());
         // 原本顺序的 userId 列表
-        List<Long> userIdList = topUserPairList.stream().map(pair -> pair.getKey().getId()).collect(Collectors.toList());
+//        List<Long> userIdList = topUserPairList.stream()
+//                .map(pair -> pair.getKey().getId())
+//                .collect(Collectors.toList());
+        List<Long> userIdList = new ArrayList<>();
+        for(Pair<User, Long> pair: topUserPairList) {
+            userIdList.add(pair.getKey().getId());
+        }
+
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
         userQueryWrapper.in("id", userIdList);
         // 1, 3, 2

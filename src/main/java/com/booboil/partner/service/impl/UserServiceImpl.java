@@ -176,6 +176,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return safetyUser;
     }
 
+    /**
+     * 用户登出
+     * @param request
+     * @return
+     */
     @Override
     public int userLogout(HttpServletRequest request) {
         request.getSession().removeAttribute(USER_LOGIN_STATE);
@@ -183,7 +188,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     /**
-     * 根据标签搜索用户（内存过滤）
+     * 根据标签搜索用户（ 方法二：内存过滤）
      *
      * @param tagNameList
      * @return
@@ -193,18 +198,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (CollectionUtils.isEmpty(tagNameList)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        //方法二： 利用内存查询
         Gson gson = new Gson();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
 
         List<User> userList = userMapper.selectList(queryWrapper);
+        // 采用stream语法糖过滤
         return userList.stream().filter(user -> {
             String tagStr = user.getTags();
             if (StringUtils.isBlank(tagStr)) {
                 return false;
             }
-            Set<String> tempTagNameSet = gson.fromJson(tagStr, new TypeToken<Set<String>>() {
-            }.getType());
+            // json反序列化对象
+            Set<String> tempTagNameSet = gson.fromJson(tagStr, new TypeToken<Set<String>>() {}.getType());
             tempTagNameSet = Optional.ofNullable(tempTagNameSet).orElse(new HashSet<>());
             for (String tagName : tagNameList) {
                 if (!tempTagNameSet.contains(tagName)) {
@@ -217,7 +222,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     /**
-     * 根据标签搜索用户（SQL查询版）
+     * 根据标签搜索用户（方法一：SQL查询版）
      *
      * @param tagNameList
      * @return
@@ -227,7 +232,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (CollectionUtils.isEmpty(tagNameList)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-//     方法一：利用SQL查询
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         for (String tagName : tagNameList) {
             queryWrapper = queryWrapper.like("tags", tagName);

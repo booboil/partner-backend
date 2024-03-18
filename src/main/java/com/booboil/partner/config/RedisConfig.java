@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author booboil
  */
-@Component
+@Component()
 @ConfigurationProperties(prefix = "spring.redis")
 @Data
 public class RedisConfig {

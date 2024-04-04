@@ -199,8 +199,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         Gson gson = new Gson();
+        // 1.先查询所有用户
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-
+        // 2.在内存中判断是否包含要求的标签
         List<User> userList = userMapper.selectList(queryWrapper);
         // 采用stream语法糖过滤
         return userList.stream().filter(user -> {
@@ -208,8 +209,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             if (StringUtils.isBlank(tagStr)) {
                 return false;
             }
-            // json反序列化对象
+            // json反序列化对象（语法）
             Set<String> tempTagNameSet = gson.fromJson(tagStr, new TypeToken<Set<String>>() {}.getType());
+            // 判断集合是否为空
             tempTagNameSet = Optional.ofNullable(tempTagNameSet).orElse(new HashSet<>());
             for (String tagName : tagNameList) {
                 if (!tempTagNameSet.contains(tagName)) {
@@ -227,6 +229,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param tagNameList
      * @return
      */
+    // 注解表示方法过时了
     @Deprecated
     private List<User> searchUsersByTagsBySQL(List<String> tagNameList) {
         if (CollectionUtils.isEmpty(tagNameList)) {

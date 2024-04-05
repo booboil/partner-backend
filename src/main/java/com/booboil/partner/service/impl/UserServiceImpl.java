@@ -276,9 +276,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         int update = userMapper.updateById(user);
-        if(update>0){
+//        if(update>0){
 //            rabbitTemplate.convertAndSend(MqConstants.USER_EXCHANGE,MqConstants.USER_INSERT_KEY,user.getId());
-        }
+//        }
         return update;
     }
 

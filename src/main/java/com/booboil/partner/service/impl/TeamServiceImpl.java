@@ -78,7 +78,6 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team>
         if (StringUtils.isNotBlank(description) && description.length() > 512) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "队伍描述过长");
         }
-
         //   4. status 是否公开（int）不传默认为 0（公开）
         int status = Optional.ofNullable(team.getStatus()).orElse(0);
         TeamStatusEnum statusEnum = TeamStatusEnum.getEnumByValue(status);
@@ -361,6 +360,7 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team>
         if (count == 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "未加入队伍");
         }
+        // 查询队伍已加入人数
         long teamHasJoinNum = countTeamUserByTeamId(teamId);
         //队伍只剩一人
         if (teamHasJoinNum == 1) {
@@ -379,6 +379,7 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team>
                 }
                 UserTeam nextUserTeam = userTeamList.get(1);
                 Long nextTeamLeaderId = nextUserTeam.getUserId();
+                // 更新当前队伍的队长
                 Team updateTeam = new Team();
                 updateTeam.setUserId(nextTeamLeaderId);
                 updateTeam.setId(teamId);

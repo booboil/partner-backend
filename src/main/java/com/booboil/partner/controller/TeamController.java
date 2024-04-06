@@ -19,6 +19,7 @@ import com.booboil.partner.model.vo.TeamUserVo;
 import com.booboil.partner.service.TeamService;
 import com.booboil.partner.service.UserService;
 import com.booboil.partner.service.UserTeamService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,7 @@ public class TeamController {
     private UserTeamService userTeamService;
 
     @PostMapping("/add")
+    @ApiOperation("创建队伍")
     public BaseResponse<Long> addTeam(@RequestBody TeamAddRequest teamAddRequest, HttpServletRequest request) {
         if (teamAddRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -60,8 +62,8 @@ public class TeamController {
 
     }
 
-
     @PostMapping("/update")
+    @ApiOperation("更新队伍")
     public BaseResponse<Boolean> updateTeam(@RequestBody TeamUpdateRequest teamUpdateRequest, HttpServletRequest request) {
         if (teamUpdateRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -75,6 +77,7 @@ public class TeamController {
     }
 
     @GetMapping("/get")
+    @ApiOperation("获取队伍信息")
     public BaseResponse<TeamUserVo> getTeamById(long id, HttpServletRequest request) {
         if (id <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -89,13 +92,14 @@ public class TeamController {
         return ResultUtils.success(teamUserVo);
     }
 
-
     @GetMapping("/list")
+    @ApiOperation("查询已加入的队伍信息")
     public BaseResponse<List<TeamUserVo>> listTeams(TeamQuery teamQuery, HttpServletRequest request) {
         if (teamQuery == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         userService.getLoginUser(request);
+        // 只有管理员查看加密队伍
         boolean isAdmin = userService.isAdmin(request);
         List<TeamUserVo> teamList = teamService.listTeams(teamQuery, isAdmin);
         if (teamList.isEmpty()) {
@@ -105,8 +109,8 @@ public class TeamController {
         return ResultUtils.success(teamList);
     }
 
-
     @GetMapping("/list/page")
+    @ApiOperation("分页查询队伍信息")
     public BaseResponse<Page<Team>> listTeamsByPage(TeamQuery teamQuery) {
         if (teamQuery == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -120,6 +124,7 @@ public class TeamController {
     }
 
     @PostMapping("/join")
+    @ApiOperation("加入队伍")
     public BaseResponse<Boolean> joinTeam(@RequestBody TeamJoinRequest teamJoinRequest, HttpServletRequest request) {
         if (teamJoinRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -130,6 +135,7 @@ public class TeamController {
     }
 
     @PostMapping("/quit")
+    @ApiOperation("退出队伍")
     public BaseResponse<Boolean> quitTeam(@RequestBody TeamQuitRequest teamQuitRequest, HttpServletRequest request) {
         if (teamQuitRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -140,6 +146,7 @@ public class TeamController {
     }
 
     @PostMapping("/delete")
+    @ApiOperation("删除队伍")
     public BaseResponse<Boolean> deleteTeam(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
 
         if (deleteRequest == null || deleteRequest.getId() <= 0) {
@@ -155,6 +162,7 @@ public class TeamController {
     }
 
     @GetMapping("/list/user")
+    @ApiOperation("")
     public BaseResponse<List<Team>> getTeamListByUserId(Long userId){
         if(userId == null || userId <= 0){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);

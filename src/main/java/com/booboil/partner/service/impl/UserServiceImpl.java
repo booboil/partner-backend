@@ -298,6 +298,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public List<User> matchUsers(long num, User loginUser) {
+        /**
+         * 首先，通过传入的 num 和 loginUser 对象来决定需要返回的匹配用户数量以及当前登录用户的信息。
+         * 使用 QueryWrapper 对象构建查询条件，选择 id 和 tags 两个字段，并排除了 tags 为空或为 "[]" 的情况，确保只查询有标签信息的用户。
+         * 通过 this.list(queryWrapper) 执行查询，获取符合条件的用户列表。
+         * 解析当前登录用户的标签信息，将其转换为 List<String> 类型的 tagList。
+         * 对于每一个查询到的用户，计算其标签与当前登录用户标签之间的相似度，使用的算法是编辑距离算法，计算两个标签列表之间的最小编辑距离，即最小的操作步骤数，来衡量它们的相似度。
+         * 将每个用户及其与当前登录用户的标签相似度封装为一个 Pair<User, Long> 对象，并添加到 list 中。
+         * 对 list 进行按照标签相似度由小到大的排序，并限制数量为 num，得到前 num 个相似度最高的用户。
+         * 将这些用户的 id 提取出来，构建新的查询条件，再次查询数据库，获取完整的用户信息。
+         * 将查询到的用户信息按照之前的顺序组装成最终的用户列表 finalUserList。
+         * 返回最终的用户列表。
+         */
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("id", "tags");
         queryWrapper.isNotNull("tags");
